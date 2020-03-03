@@ -102,13 +102,14 @@ input.onchange = (e) => {
 updateItemsLeft();
 
 const clearButton = document.querySelector('div>.clearall');
-const section = document.querySelector('.sc');
 clearButton.onclick = () => {
-  todoList = [];
-  localStorage.setItem('tasks', JSON.stringify(todoList));
   const lists = document.querySelectorAll('.todoList>li');
   lists.forEach((li) => {
-    li.querySelector('.button').click();
+    const p = li.querySelector('.text');
+    if(p.classList.contains('lineThrough') && !li.classList.contains('template')){
+
+      li.querySelector('.button').click();
+    }
   })
 };
 
