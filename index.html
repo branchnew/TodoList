@@ -16,34 +16,37 @@
     <h1>ToDos</h1>
   </header>
   <section class="sc">
-    <div class="inputfield">
+    <section class="inputfield">
       <input class="input" type="text" placeholder="What needs to be done?">
-    </div>
+      <div class="select is-primary">
+        <button></button>
+      </div>
+    </section>
     <ul class="todoList">
       <li class="template">
-        <label class="checkbox">
-          <input type="checkbox" class="selected">
-        </label>
-        <p class="text"></p>
-        <button class="button ">
-          <span class="icon is-small">
-            <i class="fas fa-times"></i>
-          </span>
-        </button>
+        <div class="task">
+          <label class="checkbox">
+            <input type="checkbox" class="selected">
+          </label>
+          <p class="text"></p>
+          <button class="button hidden">
+            <span class="icon is-small">
+              <i class="fas fa-times"></i>
+            </span>
+          </button>
+        </div>
+        <input class="editing hidden" type="text" value="">
       </li>
     </ul>
-    <div class="select is-primary">
-      <button></button>
-    </div>
-    <div class="menu hidden">
+    <footer class="menu hidden">
       <h6 class="tasksLeft"></h6>
       <ul class="links">
         <li><a href="#" class="all">All</a></li>
         <li><a href="#active" class="active">Active</a></li>
         <li><a href="#completed" class="completed">Completed</a></li>
       </ul>
-      <button class="clearall">Clear all</button>
-    </div>
+      <button class="clearall hidden">Clear completed</button>
+    </footer>
   </section>
   <footer class="ft">
     <p>Written by Farida</p>

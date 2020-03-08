@@ -25,6 +25,8 @@ const createTask = (task) => {
   const text = clone.querySelector('.text');
   const button = clone.querySelector('.button');
   const selectedTask = clone.querySelector('.selected');
+  const input = clone.querySelector('.editing');
+  const taskTodo = clone.querySelector('.task');
   
   clone.classList.remove('template');
   listElement.appendChild(clone);
@@ -45,14 +47,54 @@ const createTask = (task) => {
     localStorage.setItem('tasks', JSON.stringify(todoList));
     listElement.removeChild(clone);
     updateItemsLeft();
-  } 
+  }
   
   selectedTask.onclick = (e) => {
     text.classList.toggle('lineThrough');
     task.completed = !task.completed;
     localStorage.setItem('tasks', JSON.stringify(todoList));
     updateItemsLeft();
+    const clearCompleted = document.querySelector('.clearall');
+    if(task.completed){
+      clearCompleted.classList.remove('hidden');
+    } else {
+      const foundCompleted = todoList.find(task => task.completed);
+      if(!foundCompleted){
+        clearCompleted.classList.add('hidden');
+      }
+    }
   }
+
+  clone.ondblclick = () => {
+    input.value = task.title;
+    taskTodo.classList.add('hidden');
+    input.classList.remove('hidden');
+  }
+
+  const inputEdit = () => {
+    taskTodo.classList.remove('hidden');
+    input.classList.add('hidden');
+    task.title = input.value;
+    text.textContent = task.title;
+    localStorage.setItem('tasks', JSON.stringify(todoList));
+  } 
+
+  input.onchange = inputEdit;
+  input.onblur = inputEdit;
+  input.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      inputEdit();
+    }
+  });
+
+  clone.onmouseover = () => {
+    console.log('ciu')
+    button.classList.remove('hidden');
+  }
+  clone.onmouseout = () => {
+    button.classList.add('hidden');
+  }
+  
 };
 
 window.onhashchange = () => {
@@ -101,17 +143,20 @@ input.onchange = (e) => {
 
 updateItemsLeft();
 
-const clearButton = document.querySelector('div>.clearall');
+const clearButton = document.querySelector('footer>.clearall');
 clearButton.onclick = () => {
   const lists = document.querySelectorAll('.todoList>li');
   lists.forEach((li) => {
     const p = li.querySelector('.text');
+    const clearCompleted = document.querySelector('.clearall');
     if(p.classList.contains('lineThrough') && !li.classList.contains('template')){
-
       li.querySelector('.button').click();
+      clearCompleted.classList.add('hidden');
     }
   })
 };
+
+
 
 
 
