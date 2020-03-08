@@ -36,6 +36,7 @@ h1 {
   font-size: 100px;
   font-weight: 100;
   color: rgba(175, 47, 47, 0.15);
+  padding-top: 30px;
 }
 
 .sc {
@@ -46,11 +47,14 @@ h1 {
 }
 
 .is-primary {
-  flex: 2;
   position : absolute;
-  top: 21%;
-  left: 32%;
+  padding: 50px 35px 15px 10px;
 }
+
+
+.select.is-primary:not(:hover)::after {
+  border-color: #00d1b2;
+} 
 
 .is-primary button {
   opacity: 0;
@@ -72,6 +76,7 @@ h1 {
   box-shadow: unset;
   border: unset;
   border-bottom: 1px solid #ededed;
+  position: relative;
 }
 
 .editing {
@@ -95,6 +100,7 @@ h1 {
 }
 
 .inputfield {
+  display: flex;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 } 
 

@@ -2,6 +2,7 @@ const input = document.querySelector('.input');
 const listElement = document.querySelector('.todoList');
 const templateTask = document.querySelector('.template');
 const menu = document.querySelector('.menu');
+const clearCompleted = document.querySelector('.clearall');
 
 let todoList = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
 
@@ -37,6 +38,7 @@ const createTask = (task) => {
   if(task.completed === true){
     text.classList.toggle('lineThrough');
     selectedTask.checked = true;
+    clearCompleted.classList.remove('hidden');
   }
 
   updateItemsLeft();
@@ -54,7 +56,7 @@ const createTask = (task) => {
     task.completed = !task.completed;
     localStorage.setItem('tasks', JSON.stringify(todoList));
     updateItemsLeft();
-    const clearCompleted = document.querySelector('.clearall');
+    
     if(task.completed){
       clearCompleted.classList.remove('hidden');
     } else {
@@ -88,13 +90,22 @@ const createTask = (task) => {
   });
 
   clone.onmouseover = () => {
-    console.log('ciu')
     button.classList.remove('hidden');
   }
   clone.onmouseout = () => {
     button.classList.add('hidden');
   }
-  
+
+  const select = document.querySelector('.select');
+  const lists = document.querySelectorAll('.todoList>li');
+  select.onclick = () => {
+    lists.forEach((li) => {
+      if(!li.classList.contains('template') && !li.classList.contains('lineThrough')){
+        li.querySelector('.selected').click();
+        
+      }
+    })
+  }  
 };
 
 window.onhashchange = () => {
