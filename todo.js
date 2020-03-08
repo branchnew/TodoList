@@ -95,18 +95,23 @@ const createTask = (task) => {
   clone.onmouseout = () => {
     button.classList.add('hidden');
   }
-
-  const select = document.querySelector('.select');
-  const lists = document.querySelectorAll('.todoList>li');
-  select.onclick = () => {
-    lists.forEach((li) => {
-      if(!li.classList.contains('template') && !li.classList.contains('lineThrough')){
-        li.querySelector('.selected').click();
-        
-      }
-    })
-  }  
 };
+
+const select = document.querySelector('.select');
+select.onclick = () => {
+  let deselectAll = true;
+  const uncompleted = todoList.find((task) => !task.completed);
+  if(uncompleted){
+    deselectAll = false;
+  }
+  const lists = document.querySelectorAll('.todoList>li');
+  lists.forEach((li) => {
+    const text = li.querySelector('.text');
+    if(!li.classList.contains('template') && (deselectAll || !text.classList.contains('lineThrough'))){
+      li.querySelector('.selected').click();
+    }
+  })
+}  
 
 window.onhashchange = () => {
   
